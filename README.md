@@ -7,6 +7,9 @@ python工具合集，用来快速复用，极致执行
     + [get_map_value()](pyts/dictt.py#L12)
     字典迭代取值
     + [update_map_value()](pyts/dictt.py#L34)
+    + [sort_map_key()](pyts/dictt.py#L60)
+    + [sort_map_value()](pyts/dictt.py#64)
+    字典排序
 + StrBuffer.py
 参考java中的StringButter
     + [append()](pyts/StrBuffer.py#22)
@@ -26,3 +29,7 @@ python工具合集，用来快速复用，极致执行
     + [is_type()](pyts/dictt.py#15)
     + [is_empty()](pyts/dictt.py#25)
     + [is_has_attr()](pyts/dictt.py#35)
++ loaddatat.py
+    + [readbunchobj()](pyts/loaddatat.py#13)
+    + [writebunchobj()](pyts/loaddatat.py#19)
+    保存数据
