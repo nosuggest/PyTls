@@ -32,4 +32,11 @@ python工具合集，用来快速复用，极致执行
 + loaddatat.py
     + [readbunchobj()](pyts/loaddatat.py#13)
     + [writebunchobj()](pyts/loaddatat.py#19)
-    保存数据
+    读存数据
++ randomt.py
+    + [get_random()](pyts/randomt.py#32)
++ Chinese2num.py
+数字相关，提取数字更加强大的功能建议参考[YMMNlpUtils](https://github.com/sladesha/machine_learning/blob/master/YMMNlpUtils/YMMNlpUtils/YMMNlpUtils.py)
+    + [Chinese_2_num()](pyts/Chinese2num.py#20)
+    + [ln()](pyts/Chinese2num.py#29)
+    + [isdigit()](pyts/Chinese2num.py#33)
