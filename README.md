@@ -5,8 +5,10 @@ python工具合集，用来快速复用，极致执行
 + __init__.py
 + dictt.py
     + [get_map_value()](pyts/dictt.py#L12)
+    字典迭代取值
     + [update_map_value()](pyts/dictt.py#L34)
 + StrBuffer.py
+参考java中的StringButter
     + [append()](pyts/StrBuffer.py#22)
     + [index_at()](pyts/StrBuffer.py#37)
     + [sort()](pyts/StrBuffer.py#47)
@@ -18,6 +20,7 @@ python工具合集，用来快速复用，极致执行
     + [str_reverse()](pyts/strt.py#14)
     + [str_repeat()](pyts/dictt.py#18)
     + [str_splits()](pyts/dictt.py#29)
+    字符串批切割
 + typet.py
     + [is_none()](pyts/strt.py#11)
     + [is_type()](pyts/dictt.py#15)
