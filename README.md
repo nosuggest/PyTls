@@ -40,3 +40,5 @@ python工具合集，用来快速复用，极致执行
     + [Chinese_2_num()](pyts/Chinese2num.py#20)
     + [ln()](pyts/Chinese2num.py#29)
     + [isdigit()](pyts/Chinese2num.py#33)
++ matht.py
+    + [entropy()](pyts/matht.py#14)
