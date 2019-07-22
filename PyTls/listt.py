@@ -65,3 +65,17 @@ def permute(nums):
 
     _dfs([], nums)
     return result
+
+#将多维列表展开成一维
+def flatten(lists):
+    '''
+    :param lists: 传入的多维列表
+    '''
+    new_list = []
+    for element in lists:
+        if not isinstance(element, list):
+            new_list.append(element)
+        else:
+            new_list.extend(flatten(element))
+
+    return new_list
