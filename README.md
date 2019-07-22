@@ -1,6 +1,6 @@
 # PyTls
 
-python工具合集，用来快速复用，极致执行
+python工具合集，用来快速复用，极致执行！
 
 + __init__.py
 + dictt.py
