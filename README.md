@@ -48,3 +48,7 @@ python工具合集，用来快速复用，极致执行
 + listt.py    
     + [index_hash_map()](PyTls/listt.py#L10)list元素出现位置，等同于numpy array中的`np.where`
     + [Pi()](PyTls/listt.py#L26)
+    + [single_one()](PyTls/listt.py#L38)从list找出非两两成对的单样本
+    + [subset()](PyTls/listt.py#L44)子集
+    + [permute()](PyTls/listt.py#L56)全排列
+    

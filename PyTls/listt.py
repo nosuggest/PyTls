@@ -6,11 +6,13 @@
 
 from collections import defaultdict
 from .typet import is_type
+from functools import reduce
+
 
 def index_hash_map(l):
-    if is_type(l,list):
+    if is_type(l, list):
         pass
-    elif is_type(l,tuple):
+    elif is_type(l, tuple):
         l = list(tuple)
     else:
         raise TypeError('input data should be list or tuple')
@@ -29,5 +31,37 @@ def Pi(aim, List):
     '''
     length = len(list(List))
     aimcount = (list(List)).count(aim)
-    pi = (float)(aimcount/length)
+    pi = (float)(aimcount / length)
     return pi
+
+
+def single_one(List, explation=True):
+    if explation:
+        print("input data must be: paris and only one single")
+    return reduce(lambda x, y: x ^ y, List)
+
+
+def subset(List):
+    if not is_type(List, list):
+        raise TypeError('input data should be list or tuple')
+    ret = [[]]
+    for num in List:
+        for item in ret[:]:
+            tmp = item[:]
+            tmp.append(num)
+            ret.append(tmp)
+    return ret
+
+
+def permute(nums):
+    result = []
+
+    def _dfs(last, v_nums):
+        len_v_nums = len(v_nums)
+        if len_v_nums == 1:
+            return result.append(last + v_nums)
+        for i, n in enumerate(v_nums):
+            _dfs(last + [n], v_nums[:i] + v_nums[i + 1:])
+
+    _dfs([], nums)
+    return result
