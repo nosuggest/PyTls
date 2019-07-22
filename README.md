@@ -42,3 +42,9 @@ python工具合集，用来快速复用，极致执行
     + [isdigit()](pyts/Chinese2num.py#33)
 + matht.py
     + [entropy()](pyts/matht.py#14)
+    + [condition_entropy()](pyts/matht.py#33)
+    + [MI()](pyts/matht.py#60)来自于条件概率计算法：H(x)-H(x/y)
+    + [NMI()](pyts/matht.py#66)来自于公式计算：2`*`∑pxylog(pxy/(px`*`py))/(H(x)+H(y))
++ listt.py    
+    + [index_hash_map()](pyts/listt.py#10)list元素出现位置，等同于numpy array中的`np.where`
+    + [Pi()](pyts/listt.py#26)
