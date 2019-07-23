@@ -1,5 +1,7 @@
 # PyTls
-
+<p align="center">
+<img src="https://img.shields.io/pypi/v/PyTls.svg"></a>
+</p>
 python工具合集，用来快速复用，极致执行，欢迎试用
 
 + __init__.py
