@@ -1,6 +1,7 @@
 # PyTls
 <p align="center">
-<img src="https://img.shields.io/pypi/v/PyTls.svg"></a>
+<img alt="PyPI" src="https://img.shields.io/pypi/v/PyTls.svg"></a>
+<a href="https://travis-ci.org/sladesha/PyTls"><img src="https://travis-ci.org/sladesha/PyTls.svg?branch=master"></a>
 </p>
 python工具合集，用来快速复用，极致执行，欢迎试用
 
