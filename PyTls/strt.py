@@ -8,7 +8,7 @@
 '''
 
 import re
-from typet import is_type, is_empty
+from .typet import is_type, is_empty
 
 
 def str_reverse(word):
