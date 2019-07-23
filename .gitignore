@@ -3,3 +3,4 @@ PyTls.egg-info/
 dist/
 .idea/
 .DS_Store
+__pycache__/
