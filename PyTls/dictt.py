@@ -6,7 +6,7 @@
 @Date  : 2019/7/21 16:00
 @Desc  : 
 '''
-from typet import is_type
+from .typet import is_type
 
 
 def get_map_value(data, default=None, is_last=True, *argv):
