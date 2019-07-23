@@ -52,4 +52,7 @@ python工具合集，用来快速复用，极致执行，欢迎试用
     + [subset()](PyTls/listt.py#L44)子集
     + [permute()](PyTls/listt.py#L56)全排列
     + [flatten()](PyTls/listt.py#L70)高维列表展开
+    + [duplicates()](PyTls/listt.py#L85)原序去重
+    + [topn()](PyTls/listt.py#L95)高频统计
+    + [getindex()](PyTls/listt.py#L109)返回list中最大/最小元素的位置
     

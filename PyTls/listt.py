@@ -4,7 +4,7 @@
 # @Author  : Slade
 # @File    : listt.py
 
-from collections import defaultdict
+from collections import defaultdict, OrderedDict, Counter
 from .typet import is_type
 from functools import reduce
 
@@ -66,7 +66,8 @@ def permute(nums):
     _dfs([], nums)
     return result
 
-#将多维列表展开成一维
+
+# 将多维列表展开成一维
 def flatten(lists):
     '''
     :param lists: 传入的多维列表
@@ -79,3 +80,43 @@ def flatten(lists):
             new_list.extend(flatten(element))
 
     return new_list
+
+
+def duplicates(lists):
+    '''
+    :param lists:
+    :return: 原序去重
+    '''
+    if not is_type(lists, (list, tuple)):
+        raise TypeError("input data should be list or tuple")
+    return list(OrderedDict.fromkeys(lists).keys())
+
+
+def topn(lists, n, value_only=False):
+    '''
+    :param lists:
+    :param n: 需要返回的list中最高频次元素的个数
+    :param value_only: 只返回值
+    :return:
+    '''
+    if not is_type(lists, (list, tuple)):
+        raise TypeError("input data should be list or tuple")
+    if value_only:
+        return [val[0] for val in Counter(lists).most_common(n)]
+    return Counter(lists).most_common(n)
+
+
+def getindex(l, flag="max"):
+    '''
+    :param l:
+    :param flag:max/min
+    :return: 返回list中最大/最小元素的位置
+    '''
+    if not is_type(l, (list, tuple)):
+        raise TypeError("input data should be list or tuple")
+    if flag.strip() == "max":
+        return max(range(len(l)), key=l.__getitem__)
+    elif flag.strip() == "min":
+        return min(range(len(l)), key=l.__getitem__)
+    else:
+        return "Flag Error"
