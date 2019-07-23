@@ -57,9 +57,9 @@ def update_map_value(d, is_strict=True, **kw):
     return True
 
 
-def sort_map_key(d, get_key=lambda x: x[0], desc=False):
-    return sorted(d.items(), key=get_key, reverse=desc)
+def sort_map_key(d, desc=False):
+    return sorted(d.items(), key=lambda x: x[0], reverse=desc)
 
 
-def sort_map_value(d, get_key=lambda x: x[1], desc=True):
-    return sorted(d.items, key=get_key, reverse=desc)
+def sort_map_value(d, desc=True):
+    return sorted(d.items, key=lambda x: x[1], reverse=desc)
