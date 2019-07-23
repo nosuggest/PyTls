@@ -1,3 +1,5 @@
-*/.idea/
-*/PyTls.egg-info/
-*/dist/
+.idea/
+PyTls.egg-info/
+dist/
+.idea/
+.DS_Store
