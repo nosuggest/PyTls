@@ -51,4 +51,5 @@ python工具合集，用来快速复用，极致执行，欢迎试用
     + [single_one()](PyTls/listt.py#L38)从list找出非两两成对的单样本
     + [subset()](PyTls/listt.py#L44)子集
     + [permute()](PyTls/listt.py#L56)全排列
+    + [flatten()](PyTls/listt.py#L70)高维列表展开
     
