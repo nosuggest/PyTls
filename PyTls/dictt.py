@@ -21,14 +21,11 @@ def get_map_value(data, default=None, is_last=True, *argv):
         return TypeError("input data should be dict")
     node = data
     for name in argv:
-        if node.get(name):
+        if is_type(node.get(name),(dict,str,int,list,tuple)):
             node = node.get(name)
         else:
             return default
-    if is_last:
-        return node if not is_type(node, dict) else default
-    else:
-        return node
+    return node
 
 
 def update_map_value(d, is_strict=True, **kw):
