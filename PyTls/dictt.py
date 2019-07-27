@@ -9,6 +9,10 @@
 from .typet import is_type
 import collections
 from functools import reduce
+from collections import defaultdict
+
+__all__ = ["get_map_value", "update_map_value", "sort_map_key", "sort_map_value", "get_tree", "swap", "merge",
+           "func_dict" ]
 
 
 def get_map_value(data, default=None, is_last=True, *argv):
@@ -74,6 +78,17 @@ def swap(d):
         raise ValueError("value has the same")
     return {v: k for k, v in d.items()}
 
-def merge(d1,d2):
+
+def merge(d1, d2):
     return dict(d1.items() | d2.items())
 
+class keydefaultdict(defaultdict):
+    def __missing__(self, key):
+        if self.default_factory is None:
+            raise KeyError(key)
+        else:
+            ret = self[key] = self.default_factory(key)
+            return ret
+
+def func_dict(func):
+    return keydefaultdict(func)
