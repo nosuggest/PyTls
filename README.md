@@ -20,6 +20,8 @@ python工具合集，用来快速复用，极致执行，欢迎试用
     kv交换
     + [merge()](PyTls/dictt.py#L76)
     合并两个dict
+    + [func_dict()](PyTls/dictt.py#L93)
+    对func生成一个字典，比如func：2n，ret = func_dict(func)，ret[2]会生成2*2，且ret存储一个2:4的键对
 + StrBuffer.py
 参考java中的StringButter
     + [append()](PyTls/StrBuffer.py#L22)
