@@ -131,3 +131,6 @@ def split(l, number):
     if not is_type(l, list):
         raise TypeError("input data should be list")
     return list(zip(*(iter(l),) * number))
+
+def unzip(lists):
+    return list(zip(*lists))

@@ -8,6 +8,7 @@
 '''
 from .typet import is_type
 import collections
+from functools import reduce
 
 
 def get_map_value(data, default=None, is_last=True, *argv):
@@ -22,7 +23,7 @@ def get_map_value(data, default=None, is_last=True, *argv):
         return TypeError("input data should be dict")
     node = data
     for name in argv:
-        if is_type(node.get(name),(dict,str,int,list,tuple)):
+        if is_type(node.get(name), (dict, str, int, list, tuple)):
             node = node.get(name)
         else:
             return default
@@ -62,6 +63,17 @@ def sort_map_key(d, desc=False):
 def sort_map_value(d, desc=True):
     return sorted(d.items, key=lambda x: x[1], reverse=desc)
 
+
 def get_tree():
     tree = lambda: collections.defaultdict(tree)
     return tree()
+
+
+def swap(d):
+    if len(d) != len(set(d.values())):
+        raise ValueError("value has the same")
+    return {v: k for k, v in d.items()}
+
+def merge(d1,d2):
+    return dict(d1.items() | d2.items())
+
