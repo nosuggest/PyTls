@@ -14,6 +14,8 @@ python工具合集，用来快速复用，极致执行，欢迎试用
     + [sort_map_key()](PyTls/dictt.py#L60)
     + [sort_map_value()](PyTls/dictt.py#L64)
     字典排序
+    + [get_tree()](PyTls/dictt.py#L65)
+    树结构
 + StrBuffer.py
 参考java中的StringButter
     + [append()](PyTls/StrBuffer.py#L22)
@@ -59,4 +61,5 @@ python工具合集，用来快速复用，极致执行，欢迎试用
     + [duplicates()](PyTls/listt.py#L85)原序去重
     + [topn()](PyTls/listt.py#L95)高频统计
     + [getindex()](PyTls/listt.py#L109)返回list中最大/最小元素的位置
+    + [split()](PyTls/listt.py#125)list按照指定个数切分，比如split([1,2,3,4],3)-->[(1,2,3)]
     

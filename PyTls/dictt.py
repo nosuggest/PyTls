@@ -7,6 +7,7 @@
 @Desc  : 
 '''
 from .typet import is_type
+import collections
 
 
 def get_map_value(data, default=None, is_last=True, *argv):
@@ -60,3 +61,7 @@ def sort_map_key(d, desc=False):
 
 def sort_map_value(d, desc=True):
     return sorted(d.items, key=lambda x: x[1], reverse=desc)
+
+def get_tree():
+    tree = lambda: collections.defaultdict(tree)
+    return tree()

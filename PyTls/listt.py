@@ -120,3 +120,14 @@ def getindex(l, flag="max"):
         return min(range(len(l)), key=l.__getitem__)
     else:
         return "Flag Error"
+
+
+def split(l, number):
+    '''
+    :param l: 待处理list
+    :param number: 切分后每个tuple里面的element个数
+    :return: [()]
+    '''
+    if not is_type(l, list):
+        raise TypeError("input data should be list")
+    return list(zip(*(iter(l),) * number))
