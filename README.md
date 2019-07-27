@@ -16,6 +16,10 @@ python工具合集，用来快速复用，极致执行，欢迎试用
     字典排序
     + [get_tree()](PyTls/dictt.py#L65)
     树结构
+    + [swap()](PyTls/dictt.py#L71)
+    kv交换
+    + [merge()](PyTls/dictt.py#L76)
+    合并两个dict
 + StrBuffer.py
 参考java中的StringButter
     + [append()](PyTls/StrBuffer.py#L22)
@@ -49,17 +53,30 @@ python工具合集，用来快速复用，极致执行，欢迎试用
 + matht.py
     + [entropy()](PyTls/matht.py#L14)
     + [condition_entropy()](PyTls/matht.py#L33)
-    + [MI()](PyTls/matht.py#L60)来自于条件概率计算法：H(x)-H(x/y)
-    + [NMI()](PyTls/matht.py#L66)来自于公式计算：2`*`∑pxylog(pxy/(px`*`py))/(H(x)+H(y))
+    + [MI()](PyTls/matht.py#L60)
+    来自于条件概率计算法：H(x)-H(x/y)
+    + [NMI()](PyTls/matht.py#L66)
+    来自于公式计算：2`*`∑pxylog(pxy/(px`*`py))/(H(x)+H(y))
 + listt.py    
-    + [index_hash_map()](PyTls/listt.py#L10)list元素出现位置，等同于numpy array中的`np.where`
+    + [index_hash_map()](PyTls/listt.py#L10)
+    list元素出现位置，等同于numpy array中的`np.where`
     + [Pi()](PyTls/listt.py#L26)
-    + [single_one()](PyTls/listt.py#L38)从list找出非两两成对的单样本
-    + [subset()](PyTls/listt.py#L44)子集
-    + [permute()](PyTls/listt.py#L56)全排列
-    + [flatten()](PyTls/listt.py#L70)高维列表展开
-    + [duplicates()](PyTls/listt.py#L85)原序去重
-    + [topn()](PyTls/listt.py#L95)高频统计
-    + [getindex()](PyTls/listt.py#L109)返回list中最大/最小元素的位置
-    + [split()](PyTls/listt.py#L125)list按照指定个数切分，比如split([1,2,3,4],3)-->[(1,2,3)]
+    + [single_one()](PyTls/listt.py#L38)
+    从list找出非两两成对的单样本
+    + [subset()](PyTls/listt.py#L44)
+    子集
+    + [permute()](PyTls/listt.py#L56)
+    全排列
+    + [flatten()](PyTls/listt.py#L70)
+    高维列表展开
+    + [duplicates()](PyTls/listt.py#L85)
+    原序去重
+    + [topn()](PyTls/listt.py#L95)
+    高频统计
+    + [getindex()](PyTls/listt.py#L109)
+    返回list中最大/最小元素的位置
+    + [split()](PyTls/listt.py#L125)
+    list按照指定个数切分，比如split([1,2,3,4],3)-->[(1,2,3)]
+    + [unzip()](PyTls/listt.py#L135)
+    把zip后的数据还原
     
