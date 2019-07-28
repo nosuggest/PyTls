@@ -4,9 +4,9 @@ from setuptools import setup, find_packages
 
 setup(
     name='PyTls',
-    version='0.0.2',
+    version='0.0.5',
     description=(
-        'python tools'
+        'python tools, we need something fast and easy'
     ),
     author='sladesal',
     author_email='stw386@sina.com',
