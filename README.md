@@ -22,6 +22,8 @@ python工具合集，用来快速复用，极致执行，欢迎试用
     合并两个dict
     + [func_dict()](PyTls/dictt.py#L93)
     对func生成一个字典，比如func：2n，ret = func_dict(func)，ret[2]会生成2*2，且ret存储一个2:4的键对
+    + [WordCount()](PyTls/dictt.py#L104)
+    字典树，快速查询和高效存储，支持string和list/tuple；支持计数、查找、位置校验三个核心功能
 + StrBuffer.py
 参考java中的StringButter
     + [append()](PyTls/StrBuffer.py#L22)
