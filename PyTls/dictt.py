@@ -8,11 +8,12 @@
 '''
 from .typet import is_type
 import collections
-from functools import reduce
+from functools import reduce,lru_cache
 from collections import defaultdict
 
+
 __all__ = ["get_map_value", "update_map_value", "sort_map_key", "sort_map_value", "get_tree", "swap", "merge",
-           "func_dict" ]
+           "func_dict" ,"WordCount"]
 
 
 def get_map_value(data, default=None, is_last=True, *argv):
@@ -92,3 +93,36 @@ class keydefaultdict(defaultdict):
 
 def func_dict(func):
     return keydefaultdict(func)
+
+
+class tire():
+    def __init__(self):
+        self.children = {}
+        self.is_end = False
+        self.count = 0
+
+
+class WordCount():
+    def __init__(self):
+        self.root = tire()
+
+    def add_word(self, words):
+        node = self.root
+        for word in words:
+            if word not in node.children:
+                node.children[word] = tire()
+                node.count += 1
+            node = node.children[word]
+        node.is_end = True
+
+    def search_word(self, words):
+        @lru_cache()
+        def dfs(node, i=0):
+            if i == len(words):
+                return node.is_end
+            if words[i] in node.children:
+                return dfs(node.children[words[i]], i + 1)
+            return False
+
+        node = self.root
+        return dfs(node, 0)
