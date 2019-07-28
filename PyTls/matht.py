@@ -15,7 +15,7 @@ from .listt import index_hash_map, Pi
 __EPS = 1.4e-45
 
 
-def entropy(props, explation=True):
+def entropy(props, explation=False):
     if explation:
         print("the more the unstable")
     if is_type(props, (list)):
@@ -30,7 +30,7 @@ def entropy(props, explation=True):
     raise TypeError
 
 
-def condition_entropy(datax, datay, explation=True):
+def condition_entropy(datax, datay, explation=False):
     '''
     :param datax:
     :param datay:
@@ -57,13 +57,13 @@ def condition_entropy(datax, datay, explation=True):
     return resultConEn  # 返回条件熵 H（X|Y）
 
 
-def MI(A, B, explation=True):
+def MI(A, B, explation=False):
     if explation:
         print("the more the better")
     return entropy(A) - condition_entropy(A, B)
 
 
-def NMI(A, B, explation=True):
+def NMI(A, B, explation=False):
     if explation:
         print("the more the better")
     total = len(A)
