@@ -59,7 +59,7 @@ def condition_entropy(datax, datay, explation=False):
     if explation:
         print("the less the better")
     if len(datax) != len(datay):
-        raise ValueError("datax and datay shoule be the same length")
+        raise ValueError("datax and datay should be the same length")
     resultConEn = 0  # 最终条件熵H(X|Y)
     YElements = list(set(datay))
     index_map = index_hash_map(datay)
@@ -188,7 +188,7 @@ def relative_entropy(probx, proby):
     :return:H(p||q) = ∑pxlog(px/py),如果px与py分布一致，则return 0，差异越大return的值越大;H(p||q) = H(p,q) - H(p)
     '''
     if len(probx) != len(proby):
-        raise ValueError("input data shoule be the same length")
+        raise ValueError("input data should be the same length")
     resultConEn = 0
     for i in range(len(probx)):
         resultConEn += probx[i] * math.log(max(probx[i] / max(proby[i], __EPS), __EPS))
@@ -203,7 +203,7 @@ def cross_entropy(probx, proby):
     :return:∑pi*log(qi)
     '''
     if len(probx) != len(proby):
-        raise ValueError("input data shoule be the same length")
+        raise ValueError("input data should be the same length")
     resultConEn = 0
     for i in range(len(probx)):
         resultConEn -= probx[i] * math.log(max(proby[i], __EPS), 2)
@@ -218,10 +218,23 @@ def JSD(prob1, prob2):
     :return:
     '''
     if len(prob1) != len(prob2):
-        raise ValueError("input shoule be the same length")
+        raise ValueError("input should be the same length")
     prob1_norm = sum(abs(p) for p in prob1)
     prob2_norm = sum(abs(p) for p in prob2)
     prob1 = [p / prob1_norm for p in prob1]
     prob2 = [p / prob2_norm for p in prob2]
     middle = [(prob1[idx] + prob2[idx]) / 2 for idx in range(len(prob1))]
     return 0.5 * (relative_entropy(prob1, middle) + relative_entropy(prob2, middle))
+
+
+def Hellinger_Distince(prob1, prob2):
+    '''
+    :desc 海林格距离，用来衡量概率分布之间的相似性
+    :param prob1:
+    :param prob2:
+    :return:
+    '''
+    if len(prob1) != len(prob2):
+        raise ValueError("input should be the same length")
+    norm2 = math.sqrt(sum([(math.sqrt(prob1[idx]) - math.sqrt(prob2[idx])) ** 2 for idx in range(len(prob1))]))
+    return 1 / math.sqrt(2) * norm2

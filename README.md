@@ -75,6 +75,8 @@
     交叉熵，H(p,q) = -∑pi*log(qi) , H(p||q) = H(p,q) - H(p)
     + [JSD()](PyTls/matht.py#L213)
     衡量两个多项分布的距离，衡量两个多项分布的相似度
+    + [Hellinger_Distince()](PyTls/matht.py#L230)
+    海林格距离，用来衡量概率分布之间的相似性
 + listt.py    
     + [index_hash_map()](PyTls/listt.py#L10)
     list元素出现位置，等同于numpy array中的`np.where`
