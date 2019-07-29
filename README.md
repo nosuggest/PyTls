@@ -4,8 +4,11 @@
 <a href="https://travis-ci.org/sladesha/PyTls"><img src="https://travis-ci.org/sladesha/PyTls.svg?branch=master"></a>
 <img alt="PyPI - License" src="https://img.shields.io/pypi/l/PyTls.svg"></a>
 </p>
-python工具合集，用来快速复用，极致执行，欢迎试用
 
+- 使用手册请参考：[Python自用工具包PyTls手册](http://www.shataowei.com/2019/07/29/Python自用工具包PyTls/)
+- 各自的测试用例参考：[demos](demos.py#L6)
+
+**目录：**
 + __init__.py
 + dictt.py
     + [get_map_value()](PyTls/dictt.py#L12)
