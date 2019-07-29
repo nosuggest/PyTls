@@ -17,45 +17,69 @@ from math import e
 __EPS = 1.4e-45
 
 
-def entropy(props, explation=False):
+def entropy(props, type="list", explation=False):
+    '''
+    :param props:输入数据
+    :param type:"list"是实验出现的结果，和非1；"prob"是实验结果出现的频率，和为1
+    :param explation:是否提示结果的大小稳定度解释
+    :return:
+    '''
     if explation:
         print("the more the unstable")
-    if is_type(props, (list)):
-        prop = set(props)
+    if type not in ("list", "prob"):
+        raise ValueError("type should be list or prob,list be the expriment")
+    if type == "list":
+        if is_type(props, (list)):
+            prop = set(props)
+            resultEn = 0
+            for single in prop:
+                pi = Pi(single, props)
+                resultEn -= pi * math.log(pi)
+            return resultEn
+        elif is_type(props, (float, int)):
+            return -props * math.log(props)
+    else:
         resultEn = 0
-        for single in prop:
-            pi = Pi(single, props)
-            resultEn -= pi * math.log2(pi)
+        for pi in props:
+            resultEn -= pi * math.log(max(pi, __EPS))
         return resultEn
-    elif is_type(props, (float, int)):
-        return -props * math.log2(props)
+
     raise TypeError
 
 
-def condition_entropy(datax, datay, explation=False):
+def condition_entropy(datax, datay, type="list", explation=False):
     '''
     :param datax:
     :param datay:
+    :param type:"list"是实验出现的结果，和非1；"prob"是实验结果出现的频率，和为1
     :return:H(X/Y)，条件熵，已知Y的情况下，X的不稳定性
     :test：
     condition_entropy([1,0,1,0],[2,3,2,3])------>__EPS
-    condition_entropy([1,1,0,0],[2,3,2,3])------>1
+    condition_entropy([1,1,0,0],[2,3,2,3])------>0.6931471805599453
     '''
     if explation:
         print("the less the better")
-    YElements = list(set(datay))
+    if len(datax) != len(datay):
+        raise ValueError("datax and datay shoule be the same length")
+    if type not in ("list", "prob"):
+        raise ValueError("type should be list or prob,list be the expriment")
     resultConEn = 0  # 最终条件熵H(X|Y)
-    index_map = index_hash_map(datay)
-    for uniqueYEle in YElements:
-        YIndex = index_map.get(uniqueYEle)
-        # 找出dataY 里所有等于yi = YElements的索引值组成的列表
-        dataX_Y = []
-        # 拿出datax对应的index下的值
-        for idx in YIndex:
-            dataX_Y.append(datax[idx])
-        HX_uniqueYEle = max(entropy(dataX_Y), __EPS)  # H（X|Y=yi)
-        pi = max(__EPS, Pi(uniqueYEle, datay))  # 此时可以计算 pi = p(Y=yi)
-        resultConEn += pi * HX_uniqueYEle  # 求和 H（X|Y）= Σ p(Y=yi)*H（X|Y=yi)
+    if type == "list":
+        YElements = list(set(datay))
+        index_map = index_hash_map(datay)
+        for uniqueYEle in YElements:
+            YIndex = index_map.get(uniqueYEle)
+            # 找出dataY 里所有等于yi = YElements的索引值组成的列表
+            dataX_Y = []
+            # 拿出datax对应的index下的值
+            for idx in YIndex:
+                dataX_Y.append(datax[idx])
+            HX_uniqueYEle = max(entropy(dataX_Y), __EPS)  # H（X|Y=yi)
+            pi = max(__EPS, Pi(uniqueYEle, datay))  # 此时可以计算 pi = p(Y=yi)
+            resultConEn += pi * HX_uniqueYEle  # 求和 H（X|Y）= Σ p(Y=yi)*H（X|Y=yi)
+    else:
+        for i in range(len(datax)):
+            resultConEn += datax[i] * math.log(max(datax[i] / max(datay[i], __EPS), __EPS))
     return resultConEn  # 返回条件熵 H（X|Y）
 
 
@@ -152,7 +176,7 @@ class BM25(object):
             doc_len = len(self.docs[index])
             fi = self.f[index].get(word)
             score += (self.idf.get(word) * fi * (self.k1 + 1)) / (
-            fi + self.k1 * (1 - self.b + self.b * (doc_len / self.avgdl)))
+                fi + self.k1 * (1 - self.b + self.b * (doc_len / self.avgdl)))
         return score
 
     def similarity(self, doc):
@@ -161,3 +185,14 @@ class BM25(object):
             score = self.relation(doc, i)
             scores.append(score)
         return scores
+
+
+def JSD(prob1, prob2):
+    if len(prob1) != len(prob2):
+        raise ValueError("input shoule be the same length")
+    prob1_norm = sum(abs(p) for p in prob1)
+    prob2_norm = sum(abs(p) for p in prob2)
+    prob1 = [p / prob1_norm for p in prob1]
+    prob2 = [p / prob2_norm for p in prob2]
+    middle = [(prob1[idx] + prob2[idx]) / 2 for idx in range(len(prob1))]
+    return 0.5 * (condition_entropy(prob1, middle, "prob") + condition_entropy(prob2, middle, "prob"))
