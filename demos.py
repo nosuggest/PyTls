@@ -135,13 +135,14 @@ import math
 matht.ln(math.e)
 matht.entropy([1, 1, 2], "list")
 matht.entropy([0.2, 0.1, 0.7], "prob")
-matht.condition_entropy([1, 2, 1, 2], [1, 1, 0, 0], "list")
-matht.condition_entropy([1 / 2, 1 / 4, 1 / 2, 1 / 4], [0, 1, 0, 0], "prob")
+matht.condition_entropy([1, 2, 1, 2], [1, 1, 0, 0])
 matht.MI([1, 2, 1, 2], [1, 1, 0, 0])
 matht.NMI([1, 2, 1, 2], [1, 1, 0, 0])
 matht.word_edit_distince("am", "are")
 bm = matht.BM25([["the", "world", "is", "cool"], ["the", "life", "is", "hard"]])
 bm.similarity(["life", "is", "Beautiful"])
+matht.relative_entropy([2 / 3, 1 / 3], [1 / 2, 1 / 2])
+matht.cross_entropy([2 / 3, 1 / 3], [1 / 2, 1 / 2])
 matht.JSD([2 / 3, 1 / 3], [1 / 2, 1 / 2])
 
 ###################################################################################################################################################

@@ -59,6 +59,7 @@
 + matht.py
     + [entropy()](PyTls/matht.py#L14)
     + [condition_entropy()](PyTls/matht.py#L33)
+    条件熵，求和 H（X|Y）= Σ p(Y=yi)*H（X|Y=yi)
     + [MI()](PyTls/matht.py#L60)
     来自于条件概率计算法：H(x)-H(x/y)
     + [NMI()](PyTls/matht.py#L66)
@@ -68,7 +69,11 @@
     比较两个字符串的文本编辑距离
     + [BM25()](PyTls/matht.py#L114)
     BM25算法，计算相似度匹配
-    + [JSD()](PyTls/matht.py#L190)
+    + [relative_entropy()](PyTls/matht.py#L183)
+    相对熵，也叫KL散度，H(p||q) = ∑pxl`*`og(px/py),如果px与py分布一致，则return 0，差异越大return的值越大;H(p||q) = H(p,q) - H(p)
+    + [cross_entropy()](PyTls/matht.py#L198)
+    交叉熵，H(p,q) = -∑pi*log(qi) , H(p||q) = H(p,q) - H(p)
+    + [JSD()](PyTls/matht.py#L213)
     衡量两个多项分布的距离，衡量两个多项分布的相似度
 + listt.py    
     + [index_hash_map()](PyTls/listt.py#L10)

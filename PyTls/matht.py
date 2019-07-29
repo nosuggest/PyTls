@@ -47,11 +47,10 @@ def entropy(props, type="list", explation=False):
     raise TypeError
 
 
-def condition_entropy(datax, datay, type="list", explation=False):
+def condition_entropy(datax, datay, explation=False):
     '''
     :param datax:
     :param datay:
-    :param type:"list"是实验出现的结果，和非1；"prob"是实验结果出现的频率，和为1
     :return:H(X/Y)，条件熵，已知Y的情况下，X的不稳定性
     :test：
     condition_entropy([1,0,1,0],[2,3,2,3])------>__EPS
@@ -61,25 +60,19 @@ def condition_entropy(datax, datay, type="list", explation=False):
         print("the less the better")
     if len(datax) != len(datay):
         raise ValueError("datax and datay shoule be the same length")
-    if type not in ("list", "prob"):
-        raise ValueError("type should be list or prob,list be the expriment")
     resultConEn = 0  # 最终条件熵H(X|Y)
-    if type == "list":
-        YElements = list(set(datay))
-        index_map = index_hash_map(datay)
-        for uniqueYEle in YElements:
-            YIndex = index_map.get(uniqueYEle)
-            # 找出dataY 里所有等于yi = YElements的索引值组成的列表
-            dataX_Y = []
-            # 拿出datax对应的index下的值
-            for idx in YIndex:
-                dataX_Y.append(datax[idx])
-            HX_uniqueYEle = max(entropy(dataX_Y), __EPS)  # H（X|Y=yi)
-            pi = max(__EPS, Pi(uniqueYEle, datay))  # 此时可以计算 pi = p(Y=yi)
-            resultConEn += pi * HX_uniqueYEle  # 求和 H（X|Y）= Σ p(Y=yi)*H（X|Y=yi)
-    else:
-        for i in range(len(datax)):
-            resultConEn += datax[i] * math.log(max(datax[i] / max(datay[i], __EPS), __EPS))
+    YElements = list(set(datay))
+    index_map = index_hash_map(datay)
+    for uniqueYEle in YElements:
+        YIndex = index_map.get(uniqueYEle)
+        # 找出dataY 里所有等于yi = YElements的索引值组成的列表
+        dataX_Y = []
+        # 拿出datax对应的index下的值
+        for idx in YIndex:
+            dataX_Y.append(datax[idx])
+        HX_uniqueYEle = max(entropy(dataX_Y), __EPS)  # H（X|Y=yi)
+        pi = max(__EPS, Pi(uniqueYEle, datay))  # 此时可以计算 pi = p(Y=yi)
+        resultConEn += pi * HX_uniqueYEle  # 求和 H（X|Y）= Σ p(Y=yi)*H（X|Y=yi)
     return resultConEn  # 返回条件熵 H（X|Y）
 
 
@@ -187,7 +180,43 @@ class BM25(object):
         return scores
 
 
+def relative_entropy(probx, proby):
+    '''
+    :desc 相对熵，也叫KL散度
+    :param probx:
+    :param proby:
+    :return:H(p||q) = ∑pxlog(px/py),如果px与py分布一致，则return 0，差异越大return的值越大;H(p||q) = H(p,q) - H(p)
+    '''
+    if len(probx) != len(proby):
+        raise ValueError("input data shoule be the same length")
+    resultConEn = 0
+    for i in range(len(probx)):
+        resultConEn += probx[i] * math.log(max(probx[i] / max(proby[i], __EPS), __EPS))
+    return resultConEn
+
+
+def cross_entropy(probx, proby):
+    '''
+    :desc 交叉熵
+    :param probx:
+    :param proby:
+    :return:∑pi*log(qi)
+    '''
+    if len(probx) != len(proby):
+        raise ValueError("input data shoule be the same length")
+    resultConEn = 0
+    for i in range(len(probx)):
+        resultConEn -= probx[i] * math.log(max(proby[i], __EPS), 2)
+    return resultConEn
+
+
 def JSD(prob1, prob2):
+    '''
+    :desc 衡量prob1 和 prob2两个分布的相似程度
+    :param prob1:
+    :param prob2:
+    :return:
+    '''
     if len(prob1) != len(prob2):
         raise ValueError("input shoule be the same length")
     prob1_norm = sum(abs(p) for p in prob1)
@@ -195,4 +224,4 @@ def JSD(prob1, prob2):
     prob1 = [p / prob1_norm for p in prob1]
     prob2 = [p / prob2_norm for p in prob2]
     middle = [(prob1[idx] + prob2[idx]) / 2 for idx in range(len(prob1))]
-    return 0.5 * (condition_entropy(prob1, middle, "prob") + condition_entropy(prob2, middle, "prob"))
+    return 0.5 * (relative_entropy(prob1, middle) + relative_entropy(prob2, middle))
