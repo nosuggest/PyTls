@@ -138,6 +138,8 @@ matht.condition_entropy([1, 2, 1, 2], [1, 1, 0, 0])
 matht.MI([1, 2, 1, 2], [1, 1, 0, 0])
 matht.NMI([1, 2, 1, 2], [1, 1, 0, 0])
 matht.word_edit_distince("am", "are")
+bm = matht.BM25([["the", "world", "is", "cool"], ["the", "life", "is", "hard"]])
+bm.similarity(["life", "is", "Beautiful"])
 
 ###################################################################################################################################################
 
