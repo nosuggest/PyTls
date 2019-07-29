@@ -109,3 +109,55 @@ def word_edit_distince(str1, str2):
             # 上侧，左侧，左上侧
             matrix[i][j] = min(matrix[i - 1][j] + 1, matrix[i][j - 1] + 1, matrix[i - 1][j - 1] + cost)
     return matrix[len(str1)][len(str2)]
+
+
+class BM25(object):
+    """docstring for BM25"""
+
+    def __init__(self, docs):
+        self.docs = docs
+        self.idf = {}
+        # document frequenty
+        self.df = {}
+        # 每个doc中每个word的出现次数frequency
+        self.f = []
+        # 文章个数，平均文章长度
+        self.D = len(self.docs)
+        self.avgdl = sum(len(doc) for doc in self.docs) / self.D
+        # 可调参数
+        self.k1 = 1
+        self.b = 0.75
+
+        self.init()
+
+    def init(self):
+        for doc in self.docs:
+
+            tmp = {}
+            for word in doc:
+                tmp[word] = tmp.get(word, 0) + 1
+            self.f.append(tmp)
+
+            for key in tmp.keys():
+                self.df[key] = self.df.get(key, 0) + 1
+
+        for k, v in self.df.items():
+            self.idf[k] = math.log(self.D + 0.5) - math.log(v + 0.5)
+
+    def relation(self, doc, index):
+        score = 0
+        for word in doc:
+            if word not in self.f[index]:
+                continue
+            doc_len = len(self.docs[index])
+            fi = self.f[index].get(word)
+            score += (self.idf.get(word) * fi * (self.k1 + 1)) / (
+            fi + self.k1 * (1 - self.b + self.b * (doc_len / self.avgdl)))
+        return score
+
+    def similarity(self, doc):
+        scores = []
+        for i in range(self.D):
+            score = self.relation(doc, i)
+            scores.append(score)
+        return scores

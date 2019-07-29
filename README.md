@@ -66,6 +66,8 @@
     + [ln()](PyTls/matht.py#L93)
     + [word_edit_distince()](PyTls/matht.py#L98)
     比较两个字符串的文本编辑距离
+    + [BM25()](PyTls/matht.py#L114)
+    BM25算法，计算相似度匹配
 + listt.py    
     + [index_hash_map()](PyTls/listt.py#L10)
     list元素出现位置，等同于numpy array中的`np.where`
