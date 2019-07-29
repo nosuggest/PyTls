@@ -90,5 +90,22 @@ def NMI(A, B, explation=False):
     MIhat = 2.0 * MI / (Hx + Hy)
     return MIhat
 
+
 def ln(num):
     return log(num, e)
+
+
+def word_edit_distince(str1, str2):
+    # 构造(len(str1)+1) x (len(str2)+1)的矩阵，其中+1是为了考虑str1或者st2为空的情况
+    matrix = [[i + j for i in range(len(str2) + 1)] for j in range(len(str1) + 1)]
+
+    for i in range(1, len(str1) + 1):
+        for j in range(1, len(str2) + 1):
+            # 注意这边从1开始，所以比target和source的时候需要考虑-1
+            if str1[i - 1] == str2[j - 1]:
+                cost = 0
+            else:
+                cost = 1
+            # 上侧，左侧，左上侧
+            matrix[i][j] = min(matrix[i - 1][j] + 1, matrix[i][j - 1] + 1, matrix[i - 1][j - 1] + cost)
+    return matrix[len(str1)][len(str2)]
