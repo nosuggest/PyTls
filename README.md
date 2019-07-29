@@ -52,7 +52,6 @@ python工具合集，用来快速复用，极致执行，欢迎试用
 + Chinese2num.py
 数字相关，提取数字更加强大的功能建议参考[YMMNlpUtils](https://github.com/sladesha/machine_learning/blob/master/YMMNlpUtils/YMMNlpUtils/YMMNlpUtils.py)
     + [Chinese_2_num()](PyTls/Chinese2num.py#L20)
-    + [ln()](PyTls/Chinese2num.py#L29)
     + [isdigit()](PyTls/Chinese2num.py#L33)
 + matht.py
     + [entropy()](PyTls/matht.py#L14)
@@ -61,6 +60,7 @@ python工具合集，用来快速复用，极致执行，欢迎试用
     来自于条件概率计算法：H(x)-H(x/y)
     + [NMI()](PyTls/matht.py#L66)
     来自于公式计算：2`*`∑pxylog(pxy/(px`*`py))/(H(x)+H(y))
+    + [ln()](PyTls/matht.py#L93)
 + listt.py    
     + [index_hash_map()](PyTls/listt.py#L10)
     list元素出现位置，等同于numpy array中的`np.where`

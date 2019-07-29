@@ -11,6 +11,8 @@ import math
 from .typet import is_type
 import sys
 from .listt import index_hash_map, Pi
+from math import log
+from math import e
 
 __EPS = 1.4e-45
 
@@ -87,3 +89,6 @@ def NMI(A, B, explation=False):
     Hy = entropy(B)
     MIhat = 2.0 * MI / (Hx + Hy)
     return MIhat
+
+def ln(num):
+    return log(num, e)
