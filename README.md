@@ -88,4 +88,6 @@
     list按照指定个数切分，比如split([1,2,3,4],3)-->[(1,2,3)]
     + [unzip()](PyTls/listt.py#L135)
     把zip后的数据还原
-    
++ trickt.py
+    + [choose_method()](PyTls/trickt.py#L10) 
+    条件选择函数，根据参数不同逻辑不同，进行不同函数运算
