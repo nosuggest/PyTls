@@ -131,10 +131,36 @@ Chinese2num.isdigit("0.234")
 
 from PyTls import matht
 import math
+
 matht.ln(math.e)
-matht.entropy([0.2,0.1,0.7])
-matht.condition_entropy([1,2,1,2],[1,1,0,0])
-matht.MI([1,2,1,2],[1,1,0,0])
-matht.NMI([1,2,1,2],[1,1,0,0])
+matht.entropy([0.2, 0.1, 0.7])
+matht.condition_entropy([1, 2, 1, 2], [1, 1, 0, 0])
+matht.MI([1, 2, 1, 2], [1, 1, 0, 0])
+matht.NMI([1, 2, 1, 2], [1, 1, 0, 0])
 
 ###################################################################################################################################################
+
+from PyTls import listt
+
+list_map = listt.index_hash_map([1, 2, 3])
+list_map.get(1)
+
+listt.Pi(1, [1, 2, 3])
+
+listt.single_one([1, 1, 2, 3, 2])
+
+listt.subset([1, 2])
+
+listt.permute([1,2])
+
+listt.flatten([[1,3,4],[[4]]])
+
+listt.duplicates([4,1,3,3,6])
+
+listt.topn([1,3,3,4],1)
+
+listt.getindex([1,3,3,2,6,2],flag="max")
+
+listt.split([1,2,3,4,5,6],number=2)
+
+listt.unzip([[1,2],[3,4]])
