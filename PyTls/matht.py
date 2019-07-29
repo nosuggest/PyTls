@@ -107,7 +107,7 @@ def NMI(A, B, explation=False):
             px = 1.0 * len(idAOccur) / total
             py = 1.0 * len(idBOccur) / total
             pxy = 1.0 * len(idABOccur) / total
-            MI = MI + pxy * math.log(pxy / (px * py) + __EPS, 2)
+            MI = MI + pxy * math.log(pxy / (px * py) + __EPS)
     # 标准化互信息
     Hx = entropy(A)
     Hy = entropy(B)
