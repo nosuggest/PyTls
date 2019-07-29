@@ -137,7 +137,7 @@ matht.entropy([0.2, 0.1, 0.7])
 matht.condition_entropy([1, 2, 1, 2], [1, 1, 0, 0])
 matht.MI([1, 2, 1, 2], [1, 1, 0, 0])
 matht.NMI([1, 2, 1, 2], [1, 1, 0, 0])
-matht.word_edit_distince("am","are")
+matht.word_edit_distince("am", "are")
 
 ###################################################################################################################################################
 
@@ -152,16 +152,34 @@ listt.single_one([1, 1, 2, 3, 2])
 
 listt.subset([1, 2])
 
-listt.permute([1,2])
+listt.permute([1, 2])
 
-listt.flatten([[1,3,4],[[4]]])
+listt.flatten([[1, 3, 4], [[4]]])
 
-listt.duplicates([4,1,3,3,6])
+listt.duplicates([4, 1, 3, 3, 6])
 
-listt.topn([1,3,3,4],1)
+listt.topn([1, 3, 3, 4], 1)
 
-listt.getindex([1,3,3,2,6,2],flag="max")
+listt.getindex([1, 3, 3, 2, 6, 2], flag="max")
 
-listt.split([1,2,3,4,5,6],number=2)
+listt.split([1, 2, 3, 4, 5, 6], number=2)
 
-listt.unzip([[1,2],[3,4]])
+listt.unzip([[1, 2], [3, 4]])
+
+###################################################################################################################################################
+
+from PyTls import trickt
+
+
+def add(a, b):
+    return a + b
+
+
+def subtract(a, b):
+    return a - b
+
+
+param1 = 2
+param2 = 1
+choose_method(add, subtract, param1 > param2, param1, param2)
+choose_method(add, subtract, param1 < param2, param1, param2)
