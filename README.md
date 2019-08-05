@@ -102,3 +102,5 @@
 + trickt.py
     + [choose_method()](PyTls/trickt.py#L10) 
     条件选择函数，根据参数不同逻辑不同，进行不同函数运算
+    + [Timer()](PyTls/trickt.py#L17)
+    计时器
