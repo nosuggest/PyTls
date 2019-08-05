@@ -144,7 +144,7 @@ bm.similarity(["life", "is", "Beautiful"])
 matht.relative_entropy([2 / 3, 1 / 3], [1 / 2, 1 / 2])
 matht.cross_entropy([2 / 3, 1 / 3], [1 / 2, 1 / 2])
 matht.JSD([2 / 3, 1 / 3], [1 / 2, 1 / 2])
-matht.Hellinger_Distince([1/2, 1/2], [1/3, 2/3])
+matht.Hellinger_Distince([1 / 2, 1 / 2], [1 / 3, 2 / 3])
 
 ###################################################################################################################################################
 
@@ -176,6 +176,7 @@ listt.unzip([[1, 2], [3, 4]])
 ###################################################################################################################################################
 
 from PyTls import trickt
+import time
 
 
 def add(a, b):
@@ -188,5 +189,8 @@ def subtract(a, b):
 
 param1 = 2
 param2 = 1
-choose_method(add, subtract, param1 > param2, param1, param2)
-choose_method(add, subtract, param1 < param2, param1, param2)
+trickt.choose_method(add, subtract, param1 > param2, param1, param2)
+trickt.choose_method(add, subtract, param1 < param2, param1, param2)
+
+with trickt.Timer():
+    time.sleep(2)
