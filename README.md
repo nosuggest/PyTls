@@ -38,14 +38,14 @@
     + [storge()](PyTls/StrBuffer.py#L64)
 + strt.py
     + [str_reverse()](PyTls/strt.py#L14)
-    + [str_repeat()](PyTls/dictt.py#L18)
-    + [str_splits()](PyTls/dictt.py#L29)
+    + [str_repeat()](PyTls/strt.py#L18)
+    + [str_splits()](PyTls/strt.py#L29)
     字符串批切割
 + typet.py
-    + [is_none()](PyTls/strt.py#L11)
-    + [is_type()](PyTls/dictt.py#L15)
-    + [is_empty()](PyTls/dictt.py#L25)
-    + [is_has_attr()](PyTls/dictt.py#L35)
+    + [is_none()](PyTls/typet.py#L11)
+    + [is_type()](PyTls/typet.py#L15)
+    + [is_empty()](PyTls/typet.py#L25)
+    + [is_has_attr()](PyTls/typet.py#L35)
 + loaddatat.py
     + [readbunchobj()](PyTls/loaddatat.py#L13)
     + [writebunchobj()](PyTls/loaddatat.py#L19)
@@ -99,6 +99,8 @@
     list按照指定个数切分，比如split([1,2,3,4],3)-->[(1,2,3)]
     + [unzip()](PyTls/listt.py#L135)
     把zip后的数据还原
+    + [ContactList()](PyTls/listt.py#L139)
+    通过类继承的形式完善list类，提供search方法
 + trickt.py
     + [choose_method()](PyTls/trickt.py#L10) 
     条件选择函数，根据参数不同逻辑不同，进行不同函数运算
