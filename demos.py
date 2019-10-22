@@ -84,6 +84,9 @@ strt.str_repeat("hello", 3)
 # strt.str_splits()
 strt.str_splits(words="helloword", split_chars=["e|o"])
 
+# strt.judge_anagrams()
+strt.judge_anagrams("cbaebabacd", "abc")
+
 ###################################################################################################################################################
 
 from PyTls import typet
@@ -145,6 +148,7 @@ matht.relative_entropy([2 / 3, 1 / 3], [1 / 2, 1 / 2])
 matht.cross_entropy([2 / 3, 1 / 3], [1 / 2, 1 / 2])
 matht.JSD([2 / 3, 1 / 3], [1 / 2, 1 / 2])
 matht.Hellinger_Distince([1 / 2, 1 / 2], [1 / 3, 2 / 3])
+matht.isOdds(2)
 
 ###################################################################################################################################################
 

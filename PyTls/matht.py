@@ -238,3 +238,12 @@ def Hellinger_Distince(prob1, prob2):
         raise ValueError("input should be the same length")
     norm2 = math.sqrt(sum([(math.sqrt(prob1[idx]) - math.sqrt(prob2[idx])) ** 2 for idx in range(len(prob1))]))
     return 1 / math.sqrt(2) * norm2
+
+
+def isOdds(num):
+    '''
+    :desc 奇偶判断
+    :param num: 数值
+    :return:
+    '''
+    return True if int(num) & 1 else False
