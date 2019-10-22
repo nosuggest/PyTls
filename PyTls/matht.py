@@ -11,38 +11,57 @@ import math
 from .typet import is_type
 import sys
 from .listt import index_hash_map, Pi
+from math import log
+from math import e
 
 __EPS = 1.4e-45
 
 
-def entropy(props, explation=True):
+def entropy(props, type="list", explation=False):
+    '''
+    :param props:输入数据
+    :param type:"list"是实验出现的结果，和非1；"prob"是实验结果出现的频率，和为1
+    :param explation:是否提示结果的大小稳定度解释
+    :return:
+    '''
     if explation:
         print("the more the unstable")
-    if is_type(props, (list)):
-        prop = set(props)
+    if type not in ("list", "prob"):
+        raise ValueError("type should be list or prob,list be the expriment")
+    if type == "list":
+        if is_type(props, (list)):
+            prop = set(props)
+            resultEn = 0
+            for single in prop:
+                pi = Pi(single, props)
+                resultEn -= pi * math.log(pi)
+            return resultEn
+        elif is_type(props, (float, int)):
+            return -props * math.log(props)
+    else:
         resultEn = 0
-        for single in prop:
-            pi = Pi(single, props)
-            resultEn -= pi * math.log2(pi)
+        for pi in props:
+            resultEn -= pi * math.log(max(pi, __EPS))
         return resultEn
-    elif is_type(props, (float, int)):
-        return -props * math.log2(props)
+
     raise TypeError
 
 
-def condition_entropy(datax, datay, explation=True):
+def condition_entropy(datax, datay, explation=False):
     '''
     :param datax:
     :param datay:
     :return:H(X/Y)，条件熵，已知Y的情况下，X的不稳定性
     :test：
     condition_entropy([1,0,1,0],[2,3,2,3])------>__EPS
-    condition_entropy([1,1,0,0],[2,3,2,3])------>1
+    condition_entropy([1,1,0,0],[2,3,2,3])------>0.6931471805599453
     '''
     if explation:
         print("the less the better")
-    YElements = list(set(datay))
+    if len(datax) != len(datay):
+        raise ValueError("datax and datay should be the same length")
     resultConEn = 0  # 最终条件熵H(X|Y)
+    YElements = list(set(datay))
     index_map = index_hash_map(datay)
     for uniqueYEle in YElements:
         YIndex = index_map.get(uniqueYEle)
@@ -57,13 +76,13 @@ def condition_entropy(datax, datay, explation=True):
     return resultConEn  # 返回条件熵 H（X|Y）
 
 
-def MI(A, B, explation=True):
+def MI(A, B, explation=False):
     if explation:
         print("the more the better")
     return entropy(A) - condition_entropy(A, B)
 
 
-def NMI(A, B, explation=True):
+def NMI(A, B, explation=False):
     if explation:
         print("the more the better")
     total = len(A)
@@ -81,9 +100,150 @@ def NMI(A, B, explation=True):
             px = 1.0 * len(idAOccur) / total
             py = 1.0 * len(idBOccur) / total
             pxy = 1.0 * len(idABOccur) / total
-            MI = MI + pxy * math.log(pxy / (px * py) + __EPS, 2)
+            MI = MI + pxy * math.log(pxy / (px * py) + __EPS)
     # 标准化互信息
     Hx = entropy(A)
     Hy = entropy(B)
     MIhat = 2.0 * MI / (Hx + Hy)
     return MIhat
+
+
+def ln(num):
+    return log(num, e)
+
+
+def word_edit_distince(str1, str2):
+    # 构造(len(str1)+1) x (len(str2)+1)的矩阵，其中+1是为了考虑str1或者st2为空的情况
+    matrix = [[i + j for i in range(len(str2) + 1)] for j in range(len(str1) + 1)]
+
+    for i in range(1, len(str1) + 1):
+        for j in range(1, len(str2) + 1):
+            # 注意这边从1开始，所以比target和source的时候需要考虑-1
+            if str1[i - 1] == str2[j - 1]:
+                cost = 0
+            else:
+                cost = 1
+            # 上侧，左侧，左上侧
+            matrix[i][j] = min(matrix[i - 1][j] + 1, matrix[i][j - 1] + 1, matrix[i - 1][j - 1] + cost)
+    return matrix[len(str1)][len(str2)]
+
+
+class BM25(object):
+    """docstring for BM25"""
+
+    def __init__(self, docs):
+        self.docs = docs
+        self.idf = {}
+        # document frequenty
+        self.df = {}
+        # 每个doc中每个word的出现次数frequency
+        self.f = []
+        # 文章个数，平均文章长度
+        self.D = len(self.docs)
+        self.avgdl = sum(len(doc) for doc in self.docs) / self.D
+        # 可调参数
+        self.k1 = 1
+        self.b = 0.75
+
+        self.init()
+
+    def init(self):
+        for doc in self.docs:
+
+            tmp = {}
+            for word in doc:
+                tmp[word] = tmp.get(word, 0) + 1
+            self.f.append(tmp)
+
+            for key in tmp.keys():
+                self.df[key] = self.df.get(key, 0) + 1
+
+        for k, v in self.df.items():
+            self.idf[k] = math.log(self.D + 0.5) - math.log(v + 0.5)
+
+    def relation(self, doc, index):
+        score = 0
+        for word in doc:
+            if word not in self.f[index]:
+                continue
+            doc_len = len(self.docs[index])
+            fi = self.f[index].get(word)
+            score += (self.idf.get(word) * fi * (self.k1 + 1)) / (
+                fi + self.k1 * (1 - self.b + self.b * (doc_len / self.avgdl)))
+        return score
+
+    def similarity(self, doc):
+        scores = []
+        for i in range(self.D):
+            score = self.relation(doc, i)
+            scores.append(score)
+        return scores
+
+
+def relative_entropy(probx, proby):
+    '''
+    :desc 相对熵，也叫KL散度
+    :param probx:
+    :param proby:
+    :return:H(p||q) = ∑pxlog(px/py),如果px与py分布一致，则return 0，差异越大return的值越大;H(p||q) = H(p,q) - H(p)
+    '''
+    if len(probx) != len(proby):
+        raise ValueError("input data should be the same length")
+    resultConEn = 0
+    for i in range(len(probx)):
+        resultConEn += probx[i] * math.log(max(probx[i] / max(proby[i], __EPS), __EPS))
+    return resultConEn
+
+
+def cross_entropy(probx, proby):
+    '''
+    :desc 交叉熵
+    :param probx:
+    :param proby:
+    :return:∑pi*log(qi)
+    '''
+    if len(probx) != len(proby):
+        raise ValueError("input data should be the same length")
+    resultConEn = 0
+    for i in range(len(probx)):
+        resultConEn -= probx[i] * math.log(max(proby[i], __EPS), 2)
+    return resultConEn
+
+
+def JSD(prob1, prob2):
+    '''
+    :desc 衡量prob1 和 prob2两个分布的相似程度
+    :param prob1:
+    :param prob2:
+    :return:
+    '''
+    if len(prob1) != len(prob2):
+        raise ValueError("input should be the same length")
+    prob1_norm = sum(abs(p) for p in prob1)
+    prob2_norm = sum(abs(p) for p in prob2)
+    prob1 = [p / prob1_norm for p in prob1]
+    prob2 = [p / prob2_norm for p in prob2]
+    middle = [(prob1[idx] + prob2[idx]) / 2 for idx in range(len(prob1))]
+    return 0.5 * (relative_entropy(prob1, middle) + relative_entropy(prob2, middle))
+
+
+def Hellinger_Distince(prob1, prob2):
+    '''
+    :desc 海林格距离，用来衡量概率分布之间的相似性
+    :param prob1:
+    :param prob2:
+    :return:
+    '''
+    if len(prob1) != len(prob2):
+        raise ValueError("input should be the same length")
+    norm2 = math.sqrt(sum([(math.sqrt(prob1[idx]) - math.sqrt(prob2[idx])) ** 2 for idx in range(len(prob1))]))
+    return 1 / math.sqrt(2) * norm2
+
+
+def isOdds(num):
+    '''
+    :desc 奇偶判断
+    :param num: 数值
+    :return:
+    '''
+    return True if int(num) & 1 else False

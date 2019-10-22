@@ -6,7 +6,14 @@
 @Date  : 2019/7/21 16:00
 @Desc  : 
 '''
-from typet import is_type
+from .typet import is_type
+import collections
+from functools import reduce
+from collections import defaultdict
+import sys
+
+__all__ = ["get_map_value", "update_map_value", "sort_map_key", "sort_map_value", "get_tree", "swap", "merge",
+           "func_dict", "WordCount"]
 
 
 def get_map_value(data, default=None, is_last=True, *argv):
@@ -21,14 +28,11 @@ def get_map_value(data, default=None, is_last=True, *argv):
         return TypeError("input data should be dict")
     node = data
     for name in argv:
-        if node.get(name):
+        if is_type(node.get(name), (dict, str, int, list, tuple)):
             node = node.get(name)
         else:
             return default
-    if is_last:
-        return node if not is_type(node, dict) else default
-    else:
-        return node
+    return node
 
 
 def update_map_value(d, is_strict=True, **kw):
@@ -57,9 +61,78 @@ def update_map_value(d, is_strict=True, **kw):
     return True
 
 
-def sort_map_key(d, get_key=lambda x: x[0], desc=False):
-    return sorted(d.items(), key=get_key, reverse=desc)
+def sort_map_key(d, desc=False):
+    return sorted(d.items(), key=lambda x: x[0], reverse=desc)
 
 
-def sort_map_value(d, get_key=lambda x: x[1], desc=True):
-    return sorted(d.items, key=get_key, reverse=desc)
+def sort_map_value(d, desc=True):
+    return sorted(d.items, key=lambda x: x[1], reverse=desc)
+
+
+def get_tree():
+    tree = lambda: collections.defaultdict(tree)
+    return tree()
+
+
+def swap(d):
+    if len(d) != len(set(d.values())):
+        raise ValueError("value has the same")
+    return {v: k for k, v in d.items()}
+
+
+def merge(d1, d2):
+    return dict(d1.items() | d2.items())
+
+
+class keydefaultdict(defaultdict):
+    def __missing__(self, key):
+        if self.default_factory is None:
+            raise KeyError(key)
+        else:
+            ret = self[key] = self.default_factory(key)
+            return ret
+
+
+def func_dict(func):
+    return keydefaultdict(func)
+
+
+class tire():
+    def __init__(self):
+        self.children = {}
+        self.is_end = False
+        self.count = 0
+
+
+class WordCount():
+    def __init__(self):
+        self.root = tire()
+
+    def add_word(self, words):
+        node = self.root
+        for word in words:
+            if word not in node.children:
+                node.children[word] = tire()
+                node.count += 1
+            node = node.children[word]
+        node.is_end = True
+
+    def search_word(self, words):
+        if sys.version_info >= (3, 2):
+            from functools import lru_cache
+            @lru_cache()
+            def dfs(node, i=0):
+                if i == len(words):
+                    return node.is_end
+                if words[i] in node.children:
+                    return dfs(node.children[words[i]], i + 1)
+                return False
+        else:
+            def dfs(node, i=0):
+                if i == len(words):
+                    return node.is_end
+                if words[i] in node.children:
+                    return dfs(node.children[words[i]], i + 1)
+                return False
+        node = self.root
+        return dfs(node, 0)
