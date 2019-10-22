@@ -41,3 +41,38 @@ def str_splits(words, split_chars, warning_info=True):
     else:
         raise TypeError("split_chars should be list instead of %s" % type(split_chars))
     return [word for word in re.split(split_chars, words) if len(word) > 0]
+
+
+def judge_anagrams(search_part, target_part):
+    '''
+    :desc 判断一个句子中是否有一个目标字段的各种全排列结果
+        cbaebabacd中，abc的位置在0，6处均有
+    :param search_part: 搜索区
+    :param target_part: 目标字段
+    :return: True
+    '''
+    if (len(search_part) < len(target_part)) or len(search_part) == 0:
+        return False
+
+    window = {}
+    target = {}
+    left, right = 0, 0
+    length, limit = len(search_part), len(target_part)
+
+    for i in range(limit):
+        target[target_part[i]] = target.get(target_part[i], 0) + 1
+
+    while right < length:
+        c = search_part[right]
+        window[c] = 1 + window.get(c, 0)
+        if c not in target:
+            window.clear()
+            left = right = right + 1
+        else:
+            if len(window) == limit:
+                if window == target:
+                    return True
+                window[search_part[left]] -= 1
+                left += 1
+            right += 1
+    return False

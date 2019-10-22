@@ -38,9 +38,11 @@
     + [storge()](PyTls/StrBuffer.py#L64)
 + strt.py
     + [str_reverse()](PyTls/strt.py#L14)
-    + [str_repeat()](PyTls/dictt.py#L18)
-    + [str_splits()](PyTls/dictt.py#L29)
+    + [str_repeat()](PyTls/strt.py#L18)
+    + [str_splits()](PyTls/strt.py#L29)
     字符串批切割
+    + [judge_anagrams()](PyTls/strt.py#L46)
+    判断目标文本中是否有近似的待查找文本
 + typet.py
     + [is_none()](PyTls/strt.py#L11)
     + [is_type()](PyTls/dictt.py#L15)
@@ -77,6 +79,7 @@
     衡量两个多项分布的距离，衡量两个多项分布的相似度
     + [Hellinger_Distince()](PyTls/matht.py#L230)
     海林格距离，用来衡量概率分布之间的相似性
+    + [isOdds()](PyTls/matht.py#L243)
 + listt.py    
     + [index_hash_map()](PyTls/listt.py#L10)
     list元素出现位置，等同于numpy array中的`np.where`

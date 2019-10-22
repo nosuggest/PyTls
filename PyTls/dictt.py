@@ -8,12 +8,12 @@
 '''
 from .typet import is_type
 import collections
-from functools import reduce,lru_cache
+from functools import reduce
 from collections import defaultdict
-
+import sys
 
 __all__ = ["get_map_value", "update_map_value", "sort_map_key", "sort_map_value", "get_tree", "swap", "merge",
-           "func_dict" ,"WordCount"]
+           "func_dict", "WordCount"]
 
 
 def get_map_value(data, default=None, is_last=True, *argv):
@@ -83,6 +83,7 @@ def swap(d):
 def merge(d1, d2):
     return dict(d1.items() | d2.items())
 
+
 class keydefaultdict(defaultdict):
     def __missing__(self, key):
         if self.default_factory is None:
@@ -90,6 +91,7 @@ class keydefaultdict(defaultdict):
         else:
             ret = self[key] = self.default_factory(key)
             return ret
+
 
 def func_dict(func):
     return keydefaultdict(func)
@@ -116,13 +118,21 @@ class WordCount():
         node.is_end = True
 
     def search_word(self, words):
-        @lru_cache()
-        def dfs(node, i=0):
-            if i == len(words):
-                return node.is_end
-            if words[i] in node.children:
-                return dfs(node.children[words[i]], i + 1)
-            return False
-
+        if sys.version_info >= (3, 2):
+            from functools import lru_cache
+            @lru_cache()
+            def dfs(node, i=0):
+                if i == len(words):
+                    return node.is_end
+                if words[i] in node.children:
+                    return dfs(node.children[words[i]], i + 1)
+                return False
+        else:
+            def dfs(node, i=0):
+                if i == len(words):
+                    return node.is_end
+                if words[i] in node.children:
+                    return dfs(node.children[words[i]], i + 1)
+                return False
         node = self.root
         return dfs(node, 0)
