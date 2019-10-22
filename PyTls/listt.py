@@ -134,3 +134,24 @@ def split(l, number):
 
 def unzip(lists):
     return list(zip(*lists))
+
+
+class ContactList(list):
+    def search(self,key):
+        matchs = []
+        # self为Contact数据存储类
+        for contact in self:
+            if key in contact.key:
+                matchs.append(contact.value)
+        return matchs
+
+class Contact:
+    contactlist = ContactList()
+    def __init__(self,key,value):
+        self.key = key
+        self.value = value
+        # 此处的self为Contact类，类内存储着key，value的数据组
+        self.contactlist.append(self)
+
+    def reload(self):
+        Contact.contactlist = ContactList()

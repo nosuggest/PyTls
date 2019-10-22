@@ -44,10 +44,10 @@
     + [judge_anagrams()](PyTls/strt.py#L46)
     判断目标文本中是否有近似的待查找文本
 + typet.py
-    + [is_none()](PyTls/strt.py#L11)
-    + [is_type()](PyTls/dictt.py#L15)
-    + [is_empty()](PyTls/dictt.py#L25)
-    + [is_has_attr()](PyTls/dictt.py#L35)
+    + [is_none()](PyTls/typet.py#L11)
+    + [is_type()](PyTls/typet.py#L15)
+    + [is_empty()](PyTls/typet.py#L25)
+    + [is_has_attr()](PyTls/typet.py#L35)
 + loaddatat.py
     + [readbunchobj()](PyTls/loaddatat.py#L13)
     + [writebunchobj()](PyTls/loaddatat.py#L19)
@@ -102,6 +102,8 @@
     list按照指定个数切分，比如split([1,2,3,4],3)-->[(1,2,3)]
     + [unzip()](PyTls/listt.py#L135)
     把zip后的数据还原
+    + [ContactList()](PyTls/listt.py#L139)
+    通过类继承的形式完善list类，提供search方法
 + trickt.py
     + [choose_method()](PyTls/trickt.py#L10) 
     条件选择函数，根据参数不同逻辑不同，进行不同函数运算

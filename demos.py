@@ -177,6 +177,32 @@ listt.split([1, 2, 3, 4, 5, 6], number=2)
 
 listt.unzip([[1, 2], [3, 4]])
 
+c = listt.Contact("jack","student")
+c = listt.Contact("mika","teacher")
+c = listt.Contact("slade","student")
+'''
+# c中存储着key，value对
+In [18]: [item for item in c.contactlist.search("mika")]
+Out[18]: ['teacher']
+
+In [19]: c
+Out[19]: <__main__.Contact at 0x277d1489a58>
+
+In [21]: c.contactlist
+Out[21]:
+[<__main__.Contact at 0x277d1489a58>,
+ <__main__.Contact at 0x277d1358ef0>,
+ <__main__.Contact at 0x277d156ae80>]
+
+# 重置操作
+In [23]: c.reload()
+
+In [25]: c.contactlist
+Out[25]: []
+
+In [26]: Contact.contactlist
+Out[26]: []
+'''
 ###################################################################################################################################################
 
 from PyTls import trickt
