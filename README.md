@@ -109,3 +109,28 @@
     条件选择函数，根据参数不同逻辑不同，进行不同函数运算
     + [Timer()](PyTls/trickt.py#L17)
     计时器
++ textt.py
+    + [is_chinese()](PyTls/textt.py#L11) 
+    判断一个unicode是否是汉字
+    + [is_chinese_string()](PyTls/textt.py#L21)
+    判断是否全为汉字
+    + [is_number()](PyTls/textt.py#L29)
+    判断一个unicode是否是数字
+    + [is_alphabet()](PyTls/textt.py#L39)
+    判断一个unicode是否是英文字母
+    + [is_alphabet_string()](PyTls/textt.py#L49)
+    判断是否全为字母
+    + [stringB2Q()](PyTls/textt.py#L57)
+    半角转全角
+    + [stringQ2B()](PyTls/textt.py#L71)
+    把字符串全角转半角
+    + [remove_punctuation()](PyTls/textt.py#L85)
+    去除标点符号
+    + [uniform()](PyTls/textt.py#L94)
+    格式化字符串，完成全角转半角，大写转小写的工作
+    + [get_homophones_by_char()](PyTls/textt.py#L102)
+    根据汉字取同音字
+    + [get_homophones_by_pinyin()](PyTls/textt.py#L117)
+    根据拼音取同音字
+    + [LocationTire()](PyTls/textt.py#L144)
+    地址相似度检索
