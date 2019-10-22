@@ -51,8 +51,8 @@ print((F[2], F))
 w = dictt.WordCount()
 w.add_word(["times"])
 w.add_word("times")
-print (w.search_word("t"))
-print (w.search_word(["times"]))
+print(w.search_word("t"))
+print(w.search_word(["times"]))
 
 ###################################################################################################################################################
 from PyTls import StrBuffer
@@ -177,9 +177,9 @@ listt.split([1, 2, 3, 4, 5, 6], number=2)
 
 listt.unzip([[1, 2], [3, 4]])
 
-c = listt.Contact("jack","student")
-c = listt.Contact("mika","teacher")
-c = listt.Contact("slade","student")
+c = listt.Contact("jack", "student")
+c = listt.Contact("mika", "teacher")
+c = listt.Contact("slade", "student")
 '''
 # c中存储着key，value对
 In [18]: [item for item in c.contactlist.search("mika")]
@@ -224,3 +224,26 @@ trickt.choose_method(add, subtract, param1 < param2, param1, param2)
 
 with trickt.Timer():
     time.sleep(2)
+
+###################################################################################################################################################
+from PyTls import textt
+
+textt.is_chinese("是")
+textt.is_chinese_string("全部都是汉字")
+textt.is_number(2)
+textt.is_alphabet("asddw奥迪")
+textt.is_alphabet_string("asddw奥迪")
+textt.stringB2Q("你干么!d7&888学英 语ABC?nz")
+textt.stringQ2B("你干么！ｄ７＆８８８学英 语ＡＢＣ？ｎｚ")
+textt.remove_punctuation("这里的。需要被去掉")
+textt.uniform("格式化字符串，完成全角转半角，大写转小写的工作")
+textt.get_homophones_by_char("我的")
+textt.get_homophones_by_pinyin("zho1ng", 0)
+textt.get_homophones_by_pinyin("zhong", 1)
+
+t = textt.LocationTire()
+t.insert(["江苏", "南京", "雨花", "铁心桥", "A座"])
+t.insert(["江苏", "南京", "雨花", "软件大道", "B座"])
+t.insert(["江苏", "南京", "雨花", "雨花客厅", "C座"])
+print(t.match(["江苏", "南京", "雨花", ".", "C座"]))
+print(t.search(["江苏", "南京", "雨花"]))

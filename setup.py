@@ -17,11 +17,8 @@ setup(
     # package_data={'YMMNlpUtils': ['Data/*']},
     platforms=["all"],
     url='https://github.com/sladesha',
-    # install_requires=['pypinyin==0.35.2',
-    #                   'numpy==1.14.3',
-    #                   'pandas==0.22.0',
-    #                   'jieba==0.39'
-    #                   ],
+    install_requires=['pypinyin==0.35.2',
+                      ],
     classifiers=[
         'Operating System :: OS Independent',
         'Intended Audience :: Developers',
