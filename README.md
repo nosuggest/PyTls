@@ -27,6 +27,8 @@
     对func生成一个字典，比如func：2n，ret = func_dict(func)，ret[2]会生成2*2，且ret存储一个2:4的键对
     + [WordCount()](PyTls/dictt.py#L104)
     字典树，快速查询和高效存储，支持string和list/tuple；支持计数、查找、位置校验三个核心功能
+    + [json_loads()](PyTls/dictt.py#L158)
+    安全加载json，解决json里面的"和'混用的问题
 + StrBuffer.py
 参考java中的StringButter
     + [append()](PyTls/StrBuffer.py#L22)
@@ -134,3 +136,6 @@
     根据拼音取同音字
     + [LocationTire()](PyTls/textt.py#L144)
     地址相似度检索
++ wrappert.py
+    + [timespend()](PyTls/wrappert.py#L8) 
+    函数耗时装饰器

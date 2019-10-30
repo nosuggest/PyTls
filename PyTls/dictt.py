@@ -11,6 +11,7 @@ import collections
 from functools import reduce
 from collections import defaultdict
 import sys
+import json
 
 __all__ = ["get_map_value", "update_map_value", "sort_map_key", "sort_map_value", "get_tree", "swap", "merge",
            "func_dict", "WordCount"]
@@ -66,7 +67,7 @@ def sort_map_key(d, desc=False):
 
 
 def sort_map_value(d, desc=True):
-    return sorted(d.items, key=lambda x: x[1], reverse=desc)
+    return sorted(d.items(), key=lambda x: x[1], reverse=desc)
 
 
 def get_tree():
@@ -136,3 +137,28 @@ class WordCount():
                 return False
         node = self.root
         return dfs(node, 0)
+
+
+def __replace_quote__(json_str):
+    double_quote = []
+    new_list = []
+    for index, val in enumerate(json_str):
+        if val == '"' and json_str[index - 1] != "\\":
+            if double_quote:
+                double_quote.pop(0)
+            else:
+                double_quote.append(val)
+        if val == "'" and json_str[index - 1] != "\\":
+            if not double_quote:
+                val = '"'
+        new_list.append(val)
+    return "".join(new_list)
+
+
+def json_loads(json_str, defaulttype=dict, escape=True):
+    if not json_str:
+        return defaulttype()
+    elif escape:
+        return json.loads(__replace_quote__(json_str))
+    else:
+        return json.loads(json_str)
