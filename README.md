@@ -7,6 +7,7 @@
 
 - 使用手册请参考：[Python自用工具包PyTls手册](http://www.shataowei.com/2019/07/29/Python自用工具包PyTls/)
 - 各自的测试用例参考：[demos](demos.py#L6)
+- 更新方式`pip install -i https://pypi.tuna.tsinghua.edu.cn/simple  --upgrade PyTls`
 
 **目录：**
 + __init__.py
