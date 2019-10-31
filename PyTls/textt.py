@@ -174,18 +174,18 @@ class LocationTire(object):
     def match(self, areas):
         node = self.root
         self.level4_area = None
+        if '.' not in areas:
+            raise ValueError('需要模糊匹配关键词`.`')
 
         def dfs(node, idx):
             if idx == len(areas) - 1:
-                return list(node.children.keys())[0]
+                return node.children.keys()
             if areas[idx] == '.':
                 for area in node.children.keys():
-                    # print(dfs(node.children[area], idx + 1))
-                    # print(areas[-1])
-                    # print("---")
-                    if dfs(node.children[area], idx + 1) == areas[-1]:
+                    if areas[-1] in dfs(node.children[area], idx + 1):
                         return area
             if areas[idx] in node.children:
                 return dfs(node.children[areas[idx]], idx + 1)
+            return None
 
         return dfs(node, 0)
